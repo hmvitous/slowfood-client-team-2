@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "./Components/LoginForm";
-import { authenticate } from "./modules/auth";
+import { authenticate, register } from "./modules/auth";
 import RegistrationForm from "./Components/RegistrationForm";
 
 class App extends Component {
@@ -8,6 +8,7 @@ class App extends Component {
     renderRegistrationForm: false,
     renderLoginForm: false,
     authenticated: false,
+    registered: false,
     message: ""
   };
 
@@ -30,7 +31,7 @@ class App extends Component {
 
   onRegistration = async e => {
     e.preventDefault();
-    const response = await authenticate(
+    const response = await register(
       e.target.name.value,
       e.target.email.value,
       e.target.password.value,
