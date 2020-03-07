@@ -11,7 +11,7 @@ class App extends Component {
     message: ""
   };
 
-  onLogin = async e => {;
+  onLogin = async e => {
     e.preventDefault();
     const response = await authenticate(
       e.target.email.value,
@@ -20,7 +20,11 @@ class App extends Component {
     if (response.authenticated) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: response.message, renderLoginForm: false });
+      this.setState({
+        message: response.message,
+        renderLoginForm: false,
+        renderRegistrationForm: false
+      });
     }
   };
 
@@ -30,7 +34,6 @@ class App extends Component {
       e.target.name.value,
       e.target.email.value,
       e.target.password.value,
-      e.target.confirm_password.value
     );
     if (response.authenticated) {
       this.setState({ authenticated: true });
@@ -44,7 +47,12 @@ class App extends Component {
   };
 
   render() {
-    const { renderLoginForm, renderRegistrationForm, authenticated, message } = this.state;
+    const {
+      renderLoginForm,
+      renderRegistrationForm,
+      authenticated,
+      message
+    } = this.state;
     let renderLogin;
     let renderRegistration;
 
@@ -54,7 +62,7 @@ class App extends Component {
         break;
       case renderRegistrationForm && !authenticated:
         renderRegistration = (
-          <RegistrationForm submitFormHandler={this.onSignUp} />
+          <RegistrationForm submitFormHandler={this.onRegistration} />
         );
         break;
 
@@ -79,11 +87,7 @@ class App extends Component {
         );
         break;
       case authenticated:
-        renderLogin= (
-          <p id="message">
-            Welcome back
-          </p>
-        );
+        renderLogin = <p id="message">Welcome back</p>;
 
         break;
     }
