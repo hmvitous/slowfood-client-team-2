@@ -32,7 +32,7 @@ describe("User can create account", () => {
             url: "http://localhost:3000/api/v1/auth/sign_up",
             status: "401",
             response: {
-                errors: ["Invalid login credentials. Please try again."],
+                errors: ["Invalid credentials. Please try again."],
                 success: false
             }
         });
@@ -44,7 +44,7 @@ describe("User can create account", () => {
             cy.get("#confirm-password").type("wrongpassword");
             cy.get('button').contains('Create').click()
         });
-        cy.get("#message").should("contain", "Invalid login credentials. Please try again.");
+        cy.get("#message").should("contain", "Invalid credentials. Please try again.");
     });
 
 

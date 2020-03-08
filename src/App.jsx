@@ -34,7 +34,7 @@ class App extends Component {
     const response = await register(
       e.target.name.value,
       e.target.email.value,
-      e.target.password.value,
+      e.target.password.value
     );
     if (response.authenticated) {
       this.setState({ authenticated: true });
@@ -52,6 +52,7 @@ class App extends Component {
       renderLoginForm,
       renderRegistrationForm,
       authenticated,
+      registered,
       message
     } = this.state;
     let renderLogin;
@@ -61,7 +62,7 @@ class App extends Component {
       case renderLoginForm && !authenticated:
         renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
         break;
-      case renderRegistrationForm && !authenticated:
+      case renderRegistrationForm && !registered:
         renderRegistration = (
           <RegistrationForm submitFormHandler={this.onRegistration} />
         );
@@ -89,7 +90,9 @@ class App extends Component {
         break;
       case authenticated:
         renderLogin = <p id="message">Welcome back</p>;
-
+        break;
+      case registered:
+        renderRegistration = <p id="create-user">Account Created</p>;
         break;
     }
 
