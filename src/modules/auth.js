@@ -20,7 +20,7 @@ const register = async (name, email, password) => {
       email: email,
       password: password
     });
-    await storeAuthCredentials(response);
+    // await storeAuthCredentials(response);
     return { authenticated: true };
   } catch (error) {
     return { authenticated: false, message: "Invalid credentials. Please try again."};
