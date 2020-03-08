@@ -36,8 +36,8 @@ class App extends Component {
       e.target.email.value,
       e.target.password.value
     );
-    if (response.authenticated) {
-      this.setState({ authenticated: true });
+    if (response.registered) {
+      this.setState({ registered: true });
     } else {
       this.setState({
         message: response.message,
@@ -62,11 +62,18 @@ class App extends Component {
       case renderLoginForm && !authenticated:
         renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
         break;
+
+        case registered:
+          renderRegistration = <p id="message">Account Created</p>;
+        break;
+  
       case renderRegistrationForm && !registered:
         renderRegistration = (
           <RegistrationForm submitFormHandler={this.onRegistration} />
+  
         );
-        break;
+
+  
 
       case !renderLoginForm && !authenticated:
         renderLogin = (
@@ -86,14 +93,17 @@ class App extends Component {
             </button>
             <p id="message">{message}</p>
           </>
+          
         );
         break;
+
+
+        
       case authenticated:
         renderLogin = <p id="message">Welcome back</p>;
-        break;
-      case registered:
-        renderRegistration = <p id="create-user">Account Created</p>;
-        break;
+      break;
+     
+    
     }
 
     return (

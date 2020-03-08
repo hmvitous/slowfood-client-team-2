@@ -9,7 +9,10 @@ const authenticate = async (email, password) => {
     await storeAuthCredentials(response);
     return { authenticated: true };
   } catch (error) {
-    return { authenticated: false, message: "Invalid login credentials. Please try again."};
+    return {
+      authenticated: false,
+      message: "Invalid login credentials. Please try again."
+    };
   }
 };
 
@@ -20,13 +23,15 @@ const register = async (name, email, password) => {
       email: email,
       password: password
     });
-    // await storeAuthCredentials(response);
-    return { authenticated: true };
+    await storeAuthCredentials(response);
+    return { registered: true };
   } catch (error) {
-    return { authenticated: false, message: "Invalid credentials. Please try again."};
+    return {
+      registered: false,
+      message: "Invalid credentials. Please try again."
+    };
   }
 };
-
 
 const storeAuthCredentials = ({ headers }) => {
   const credentials = {
