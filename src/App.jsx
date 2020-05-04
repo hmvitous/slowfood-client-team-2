@@ -9,10 +9,10 @@ class App extends Component {
     renderLoginForm: false,
     authenticated: false,
     registered: false,
-    message: ""
+    message: "",
   };
 
-  onLogin = async e => {
+  onLogin = async (e) => {
     e.preventDefault();
     const response = await authenticate(
       e.target.email.value,
@@ -24,12 +24,12 @@ class App extends Component {
       this.setState({
         message: response.message,
         renderLoginForm: false,
-        renderRegistrationForm: false
+        renderRegistrationForm: false,
       });
     }
   };
 
-  onRegistration = async e => {
+  onRegistration = async (e) => {
     e.preventDefault();
     const response = await register(
       e.target.name.value,
@@ -42,7 +42,7 @@ class App extends Component {
       this.setState({
         message: response.message,
         renderLoginForm: false,
-        renderRegistrationForm: false
+        renderRegistrationForm: false,
       });
     }
   };
@@ -53,7 +53,7 @@ class App extends Component {
       renderRegistrationForm,
       authenticated,
       registered,
-      message
+      message,
     } = this.state;
     let renderLogin;
     let renderRegistration;
@@ -63,17 +63,14 @@ class App extends Component {
         renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
         break;
 
-        case registered:
-          renderRegistration = <p id="message">Account Created</p>;
+      case registered:
+        renderRegistration = <p id="message">Account Created</p>;
         break;
-  
+
       case renderRegistrationForm && !registered:
         renderRegistration = (
           <RegistrationForm submitFormHandler={this.onRegistration} />
-  
         );
-
-  
 
       case !renderLoginForm && !authenticated:
         renderLogin = (
@@ -93,17 +90,12 @@ class App extends Component {
             </button>
             <p id="message">{message}</p>
           </>
-          
         );
         break;
 
-
-        
       case authenticated:
         renderLogin = <p id="message">Welcome back</p>;
-      break;
-     
-    
+        break;
     }
 
     return (
